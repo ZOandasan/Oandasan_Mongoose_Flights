@@ -7,4 +7,18 @@
     <div><a href="/flights/<%= flight._id %>/edit">Edit</a></div>
 </section>
 
+<br><br><h2>Add New Destination</h2>
+<form id="add-destination-form" method="POST" action="/flights/<%= flight._id %>/destinations">
+    <label>Destination: </label>
+    <select name="destination">
+        <option value="AUS">AUS</option>
+        <option value="DFW">DWF</option>
+        <option value="DEN">DEN</option>   
+        <option value="LAX">LAX</option>
+        <option value="SAN">SAN</option>
+    </select>
+    <input type="submit" value="Add Destination">
+</form>
+
+
 <%- include('../partials/footer') %>
