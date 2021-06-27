@@ -5,7 +5,14 @@ module.exports = {
 }
 
 function create(req, res){
+    Flight.findById(req.params.id, function(err, flight){
+        flight.destinations.push(req.body);
+        flight.save(function(err){
+            res.redirect(`/flights/${flight._id}`);
+        });
+    });
     // delete any properties with empty strings so that default values will work
+    /*
     for (let key in req.body) {
         if (req.body[key] === '') delete req.body[key];
     }
@@ -14,6 +21,6 @@ function create(req, res){
         if (err) return;
         res.redirect('/flights');
     })
-
+    */
     //Flight.findById
 }
