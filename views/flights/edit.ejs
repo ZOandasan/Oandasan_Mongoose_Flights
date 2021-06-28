@@ -1,6 +1,8 @@
 <%- include('../partials/header') %>
 
-<form id="edit-form" action="/flights" method="PUT">
+
+
+<form id="edit-form" action="/flights/<%= flight._id %>?_method=PUT" method="POST">
     <label>Airline:</label>
     <select name="airline">
         <% if (flight.airline === 'American') { %>

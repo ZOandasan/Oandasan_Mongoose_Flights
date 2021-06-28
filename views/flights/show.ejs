@@ -29,7 +29,7 @@
         <div>Airport: <%= d.airport %></div>
         <div>Arrival: <%= d.arrival %></div>
         <div>
-            <form action="/destinations/<%= d.id %> ?_method=DELETE" method="POST" class="delete-form">
+            <form action="/destinations/<%= d._id %> ?_method=DELETE" method="POST" class="delete-form">
                 <button type="submit">X</button>
             </form>
         </div>

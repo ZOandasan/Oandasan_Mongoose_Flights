@@ -62,15 +62,16 @@ function update (req, res) {
 */
 
 function update(req, res){
+    console.log(req.body);
     Flight.findOneAndUpdate(
         {_id: req.params.id},
         req.body,
         {new: true},
         function(err, flight) {
-          if (err || !flight) return res.redirect('/flight');
-          res.redirect(`flight/${flight._id}`);
+          if (err || !flight) return res.redirect('/flights');
+          res.redirect(`/flights/${flight._id}`);
         }
-      );
+    );
 }
 
 function deleteFlight(req, res){

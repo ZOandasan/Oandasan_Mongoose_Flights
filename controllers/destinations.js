@@ -16,6 +16,7 @@ function create(req, res){
 
 function deleteDestination(req, res){
     // Note the cool "dot" syntax to query on the property of a subdoc
+    console.log(req.params.id);
     Flight.findOne(
         {'destinations._id': req.params.id},
         function(err, flight) {
