@@ -1,4 +1,5 @@
 <%- include('../partials/header') %>
+
 <section id="show-page">
     <div>Airline: <%= flight.airline %></div>
     <div>Airport: <%= flight.airport %></div>
@@ -16,14 +17,11 @@
         <option value="DEN">DEN</option>   
         <option value="LAX">LAX</option>
         <option value="SAN">SAN</option>
-    </select><br><br>
+    </select><br>
     <label>Arrival:</label>
     <input type="datetime-local" id="arrival" name="arrival"><br>
     <input type="submit" value="Add Destination">
-</form>
-
-
-
+</form><br><br>
 
 <% if (flight.destinations.length) { %>
     <% flight.destinations.forEach(function(f) { %>
@@ -37,6 +35,19 @@
     <% }); %>
 <% } else { %>
     <h5>No Destinations Yet</h5>
+<% } %>
+
+
+<% if (flight.tickets.length) { %>
+    <% flight.tickets.forEach(function(t) { %>
+    <section>
+        <div>Seat: <%= t.seat %></div>
+        <div>Price: <%= t.price %></div>
+        <div>Flight: <%= t.flightID %></div>
+    </section><br>
+    <% }); %>
+<% } else { %>
+    <h5>No Tickets Yet</h5>
 <% } %>
 
 
