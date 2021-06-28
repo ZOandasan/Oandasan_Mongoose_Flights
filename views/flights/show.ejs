@@ -24,12 +24,14 @@
 </form><br><br>
 
 <% if (flight.destinations.length) { %>
-    <% flight.destinations.forEach(function(f) { %>
+    <% flight.destinations.forEach(function(d) { %>
     <section>
-        <div>Airport: <%= f.airport %></div>
-        <div>Arrival: <%= f.arrival %></div>
+        <div>Airport: <%= d.airport %></div>
+        <div>Arrival: <%= d.arrival %></div>
         <div>
-
+            <form action="/destinations/<%= d.id %> ?_method=DELETE" method="POST" class="delete-form">
+                <button type="submit">X</button>
+            </form>
         </div>
     </section><br>
     <% }); %>
@@ -47,12 +49,11 @@
 </form><br><br>
 
 
-<% if (flight.tickets.length) { %>
-    <% flight.tickets.forEach(function(t) { %>
+<% if (tickets.length) { %>
+    <% tickets.forEach(function(t) { %>
     <section>
         <div>Seat: <%= t.seat %></div>
         <div>Price: <%= t.price %></div>
-        <div>Flight: <%= t.flightID %></div>
     </section><br>
     <% }); %>
 <% } else { %>

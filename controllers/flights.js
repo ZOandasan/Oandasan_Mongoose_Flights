@@ -1,4 +1,6 @@
 var Flight = require('../models/flight');
+const Ticket = require('../models/ticket');
+
 
 module.exports = {
     new: newFlight,
@@ -19,8 +21,11 @@ function index(req, res){
 
 function show(req, res) {
     Flight.findById(req.params.id, function(err, flight) {
-        res.render('flights/show', { title: 'Flight Details', flight });
+        Ticket.find({flightID: req.params.id}, function(err, tickets){
+            res.render('flights/show', { title: 'Flight Details', flight, tickets });
+        });
       });
+    
 }
 
 function newFlight(req, res){
@@ -34,8 +39,8 @@ function create(req, res){
     }
     const flight = new Flight(req.body);
     flight.save(function(err){
-        if (err) return;
         res.redirect('/flights');
+        if (err) return;
     })
 }
 
@@ -45,13 +50,27 @@ function edit (req, res) {
         res.render('flights/edit', { title: 'Flight Details', flight });
     });
 }
-//Create Function Update
 
+/*
+//Create Function Update
 function update (req, res) {
     const flight_ID = req.params.id;
     const flight = flights.find(flight => flight.flight_ID === flight_ID);
     Object.assign(flight, req.body);
     res/redirect(`/flights/${req.params.id}`)
+}
+*/
+
+function update(req, res){
+    Flight.findOneAndUpdate(
+        {_id: req.params.id},
+        req.body,
+        {new: true},
+        function(err, flight) {
+          if (err || !flight) return res.redirect('/flight');
+          res.redirect(`flight/${flight._id}`);
+        }
+      );
 }
 
 function deleteFlight(req, res){
