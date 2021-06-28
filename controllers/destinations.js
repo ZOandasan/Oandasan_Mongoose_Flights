@@ -2,7 +2,7 @@ const Flight = require('../models/flight');
 
 module.exports = {
     create,
-    delete: deleteDestination,
+    delete: deleteDest,
 }
 
 function create(req, res){
@@ -14,20 +14,13 @@ function create(req, res){
     });
 }
 
-function deleteDestination(req, res){
-    // Note the cool "dot" syntax to query on the property of a subdoc
-    console.log(req.params.id);
-    Flight.findOne(
-        {'destinations._id': req.params.id},
-        function(err, flight) {
-        if (!flight || err) return res.redirect(`/flights/${flight._id}`);
-        // Remove the subdoc (https://mongoosejs.com/docs/subdocs.html)
-        flight.destinations.remove(req.params.id);
-        // Save the updated book
+
+function deleteDest(req, res) {
+    Flight.findOne({'destinations._id': req.params.id}, function(err, flight) {
+        const destSubdoc = flight.destinations.id(req.params.id);
+        destSubdoc.remove();
         flight.save(function(err) {
-            // Redirect back to the book's show view
             res.redirect(`/flights/${flight._id}`);
-        });
-        }
-    );
+        })
+    })
 }
