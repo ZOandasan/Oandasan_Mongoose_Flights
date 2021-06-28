@@ -7,6 +7,7 @@ module.exports = {
     show,
     edit,
     update,
+    delete: deleteFlight,
 };
 
 function index(req, res){
@@ -51,4 +52,12 @@ function update (req, res) {
     const flight = flights.find(flight => flight.flight_ID === flight_ID);
     Object.assign(flight, req.body);
     res/redirect(`/flights/${req.params.id}`)
+}
+
+function deleteFlight(req, res){
+    Flight.findOneAndDelete(
+        {_id: req.params.id}, function(err){
+            res.redirect('/flights');
+        }
+    );
 }

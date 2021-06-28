@@ -18,7 +18,7 @@
         <option value="SAN">SAN</option>
     </select><br><br>
     <label>Arrival:</label>
-    <input type="datetime-local" id="arrivals" name="arrivals"><br>
+    <input type="datetime-local" id="arrival" name="arrival"><br>
     <input type="submit" value="Add Destination">
 </form>
 
@@ -26,27 +26,18 @@
 
 
 <% if (flight.destinations.length) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>Timestamp</th>
-          <th>Airport</th>
-          <th>Arrival</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% flight.destinations.forEach(function(f) { %>
-          <tr>
-            <td><%= f.createdAt.toLocaleDateString() %></td>
-            <td><%= f.airport %></td>
-            <td><%= f.arrival %></td>
-          </tr>
-        <% }); %>
-      </tbody>
-    </table>
-  <% } else { %>
+    <% flight.destinations.forEach(function(f) { %>
+    <section>
+        <div>Airport: <%= f.airport %></div>
+        <div>Arrival: <%= f.arrival %></div>
+        <div>
+
+        </div>
+    </section><br>
+    <% }); %>
+<% } else { %>
     <h5>No Destinations Yet</h5>
-  <% } %>
+<% } %>
 
 
 
